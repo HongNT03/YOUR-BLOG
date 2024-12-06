@@ -10,6 +10,7 @@ import Project from "./pages/Project";
 
 import Header from "./components/Header";
 import Footer from "./components/Footer";
+import PrivateRouter from "./components/PrivateRouter";
 
 export default function App() {
   return (
@@ -21,9 +22,11 @@ export default function App() {
         <Route path="/sign-in" element={<SignIn />} />
         <Route path="/sign-up" element={<SignUp />} />
         <Route path="/project" element={<Project />} />
-        <Route path="/dashboard" element={<Dashboard />} />
+        <Route element={<PrivateRouter />}>
+          <Route path="/dashboard" element={<Dashboard />} />
+        </Route>
       </Routes>
-      <Footer/>
+      <Footer />
     </BrowserRouter>
   );
 }
