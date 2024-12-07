@@ -16,7 +16,7 @@ const DashSidebar = () => {
     }
   }, [location.search]);
   return (
-    <Sidebar classname="w-full md:w-56">
+    <Sidebar className="w-full md:w-56">
       <Sidebar.Items>
         <Sidebar.ItemGroup>
           <Link to="/dashboard?tab=profile">
@@ -24,12 +24,13 @@ const DashSidebar = () => {
               active={tab === "profile"}
               icon={HiUser}
               label={"User"}
-              lableColor="dark"
+              labelColor="dark"
+              as="div"
             >
               Profile
             </Sidebar.Item>
           </Link>
-          <Sidebar.Item icon={HiArrowCircleRight} classname="cursor-pointer">
+          <Sidebar.Item icon={HiArrowCircleRight} className="cursor-pointer">
             Sign Out
           </Sidebar.Item>
         </Sidebar.ItemGroup>
