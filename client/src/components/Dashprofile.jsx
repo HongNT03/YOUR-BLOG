@@ -1,11 +1,15 @@
 import React, { useRef, useState, useEffect } from "react";
 import { useSelector, useDispatch } from "react-redux";
-import { TextInput, Button, Alert } from "flowbite-react";
+import { TextInput, Button, Alert, Modal } from "flowbite-react";
 import { uploadImage } from "/src/utils/cloudinary.js";
+import { HiOutlineExclamationCircle } from "react-icons/hi";
 import {
   updateFailure,
   updateStart,
   updateSuccess,
+  deleteUserStart,
+  deleteUserSuccess,
+  deleteUserFailure,
 } from "../redux/user/userSlice";
 
 const Dashprofile = () => {
@@ -14,8 +18,9 @@ const Dashprofile = () => {
   const [updateUserSuccess, setUpdateUserSuccess] = useState(null);
   const [updateUserError, setUpdateUserError] = useState(null);
   const [isUploading, setIsUploading] = useState(false);
+  const [showModal, setShowModal] = useState(false);
 
-  const { currentUser } = useSelector((state) => state.user);
+  const { currentUser, error } = useSelector((state) => state.user);
   const [data, setData] = useState({});
   const filePickerRef = useRef();
   const dispatch = useDispatch();
@@ -27,16 +32,33 @@ const Dashprofile = () => {
   }, [imageFile]);
 
   const uploadFile = async () => {
-    setIsUploading(true); // Start uploading
+    setIsUploading(true);
     try {
       const result = await uploadImage(imageFile);
-      // data url
       const imgUrlFromCloudinary = result.secure_url;
       setData({ ...data, profilePicture: imgUrlFromCloudinary });
     } catch (error) {
       console.error("Upload failed:", error);
     } finally {
-      setIsUploading(false); // Upload complete
+      setIsUploading(false);
+    }
+  };
+
+  const handleDelete = async () => {
+    setShowModal(false);
+    try {
+      dispatch(deleteUserStart());
+      const res = await fetch(`/api/user/delete/${currentUser._id}`, {
+        method: "DELETE",
+      });
+      const dt = await res.json();
+      if (!res.ok) {
+        dispatch(deleteUserFailure(dt.message));
+      } else {
+        dispatch(deleteUserSuccess(dt));
+      }
+    } catch (error) {
+      dispatch(deleteUserFailure(error));
     }
   };
 
@@ -134,7 +156,9 @@ const Dashprofile = () => {
         </Button>
       </form>
       <div className="text-red-500 flex justify-between mt-5">
-        <span className="cursor-pointer">Delete Account</span>
+        <span onClick={() => setShowModal(true)} className="cursor-pointer">
+          Delete Account
+        </span>
         <span className="cursor-pointer">Sign Out</span>
       </div>
       {updateUserSuccess && (
@@ -147,6 +171,35 @@ const Dashprofile = () => {
           {updateUserError}
         </Alert>
       )}
+      {/* {error && (
+        <Alert color="failure" className="mt-5">
+          {error}
+        </Alert>
+      )} */}
+      <Modal
+        show={showModal}
+        onClose={() => setShowModal(false)}
+        popup
+        size="md"
+      >
+        <Modal.Header />
+        <Modal.Body>
+          <div className="text-center">
+            <HiOutlineExclamationCircle className="h-14 w-14 text-gray-400 dark:text-gray-200 mb-4 mx-auto" />
+            <h3 className="mb-5 text-lg text-gray-500 dark:text-gray-400">
+              Are you sure to delete your account
+            </h3>
+            <div className="flex justify-center gap-4">
+              <Button color="failure" onClick={handleDelete}>
+                Yes, I'm sure
+              </Button>
+              <Button color="gray" onClick={() => setShowModal(false)}>
+                No, cancel
+              </Button>
+            </div>
+          </div>
+        </Modal.Body>
+      </Modal>
     </div>
   );
 };
