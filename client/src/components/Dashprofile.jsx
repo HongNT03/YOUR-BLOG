@@ -11,9 +11,9 @@ import {
 const Dashprofile = () => {
   const [imageFile, setImageFile] = useState(null);
   const [imgFileUrl, setimgFileUrl] = useState(null);
-  const [imgUploadSuccess, setImgUploadSuccess] = useState(false);
   const [updateUserSuccess, setUpdateUserSuccess] = useState(null);
   const [updateUserError, setUpdateUserError] = useState(null);
+  const [isUploading, setIsUploading] = useState(false);
 
   const { currentUser } = useSelector((state) => state.user);
   const [data, setData] = useState({});
@@ -27,15 +27,16 @@ const Dashprofile = () => {
   }, [imageFile]);
 
   const uploadFile = async () => {
+    setIsUploading(true); // Start uploading
     try {
       const result = await uploadImage(imageFile);
       // data url
       const imgUrlFromCloudinary = result.secure_url;
-      setImgUploadSuccess(true);
       setData({ ...data, profilePicture: imgUrlFromCloudinary });
     } catch (error) {
-      setImgUploadSuccess(false);
       console.error("Upload failed:", error);
+    } finally {
+      setIsUploading(false); // Upload complete
     }
   };
 
@@ -47,10 +48,11 @@ const Dashprofile = () => {
       setUpdateUserError("No changes made");
       return;
     }
-    if (imgUploadSuccess) {
-      setUpdateUserError("Please wait Image to upload");
+    if (isUploading) {
+      setUpdateUserError("Please wait for the image to finish uploading");
       return;
     }
+
     try {
       dispatch(updateStart());
       const res = await fetch(`/api/user/update/${currentUser._id}`, {
