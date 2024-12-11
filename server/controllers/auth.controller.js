@@ -31,23 +31,27 @@ const signin = async (req, res, next) => {
   const { email, password } = req.body;
 
   if (!email || !password || email === "" || password === "") {
-    return next(errorhandler(400, "All fields are required")); 
+    return next(errorhandler(400, "All fields are required"));
   }
 
   try {
     const validUser = await User.findOne({ email });
     if (!validUser) {
-      return next(errorhandler(404, "User not found")); 
+      return next(errorhandler(404, "User not found"));
     }
     const validPassword = bcrypt.compareSync(password, validUser.password);
     if (!validPassword) {
-      return next(errorhandler(400, "Invalid password")); 
+      return next(errorhandler(400, "Invalid password"));
     }
 
     const { password: pass, ...rest } = validUser._doc;
-    const token = jwt.sign({ id: validUser._id }, process.env.JWT_SECRET, {
-      expiresIn: "1h",
-    });
+    const token = jwt.sign(
+      { id: validUser._id, isAdmin: validUser.isAdmin },
+      process.env.JWT_SECRET,
+      {
+        expiresIn: "1h",
+      }
+    );
     res
       .status(200)
       .cookie("access_token", token, { httpOnly: true })
@@ -62,7 +66,10 @@ const google = async (req, res, next) => {
   try {
     const user = await User.findOne({ email });
     if (user) {
-      const token = jwt.sign({ id: user._id }, process.env.JWT_SECRET);
+      const token = jwt.sign(
+        { id: user._id, isAdmin: user.isAdmin },
+        process.env.JWT_SECRET
+      );
       const { password: pass, ...rest } = user._doc;
       res
         .status(200)
@@ -83,7 +90,10 @@ const google = async (req, res, next) => {
       });
       await newUser.save();
       const { password, ...rest } = newUser._doc;
-      const token = jwt.sign({ id: user._id }, process.env.JWT_SECRET);
+      const token = jwt.sign(
+        { id: user._id, isAdmin: newUser.isAdmin },
+        process.env.JWT_SECRET
+      );
       res
         .status(200)
         .cookie("access_token", token, { httpOnly: true })
