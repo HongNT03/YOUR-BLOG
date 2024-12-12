@@ -38,7 +38,10 @@ const Dashprofile = () => {
     try {
       const result = await uploadImage(imageFile);
       const imgUrlFromCloudinary = result.secure_url;
-      setData({ ...data, profilePicture: imgUrlFromCloudinary });
+      setData((prevData) => ({
+        ...prevData,
+        profilePicture: imgUrlFromCloudinary,
+      }));
     } catch (error) {
       console.error("Upload failed:", error);
     } finally {
