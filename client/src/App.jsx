@@ -7,10 +7,11 @@ import SignIn from "./pages/SignIn";
 import SignUp from "./pages/SignUp";
 import Dashboard from "./pages/Dashboard";
 import Project from "./pages/Project";
-
 import Header from "./components/Header";
 import Footer from "./components/Footer";
 import PrivateRouter from "./components/PrivateRouter";
+import OnlyAdminPrivateRouter from "./components/OnlyAdminPrivateRouter";
+import CreatePost from "./pages/CreatePost";
 
 export default function App() {
   return (
@@ -24,6 +25,9 @@ export default function App() {
         <Route path="/project" element={<Project />} />
         <Route element={<PrivateRouter />}>
           <Route path="/dashboard" element={<Dashboard />} />
+        </Route>
+        <Route element={<OnlyAdminPrivateRouter />}>
+          <Route path="/create-post" element={<CreatePost />} />
         </Route>
       </Routes>
       <Footer />
