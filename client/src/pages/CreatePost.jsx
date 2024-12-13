@@ -26,7 +26,7 @@ const CreatePost = () => {
       const imgUrlFromCloudinary = result.secure_url;
       setData((prevData) => ({
         ...prevData,
-        postImg: imgUrlFromCloudinary,
+        image: imgUrlFromCloudinary,
       }));
     } catch (error) {
       console.error("Upload failed:", error);
