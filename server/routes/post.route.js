@@ -5,6 +5,7 @@ import { PostController } from "../controllers/post.controller.js";
 const router = express();
 
 router.post("/create", verifyToken, PostController.create);
+router.put("/update/:postId/:userId", verifyToken, PostController.update);
 router.get("/list-post", PostController.getListPosts);
 router.delete("/deletepost/:postId/:userId", verifyToken, PostController.deletePost)
 
