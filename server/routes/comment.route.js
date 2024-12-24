@@ -6,6 +6,7 @@ const router = express();
 
 router.post("/create", verifyToken, CommentController.create);
 router.get("/getPostComment/:postId", CommentController.getGetPostComment)
+router.get("/getListComment", verifyToken, CommentController.getListComment)
 router.put('/likeComment/:commentId', verifyToken, CommentController.likeComment)
 router.put('/editComment/:commentId', verifyToken, CommentController.editComment)
 router.delete('/deleteComment/:commentId', verifyToken, CommentController.deleteComment)
