@@ -6,5 +6,6 @@ const router = express();
 
 router.post("/create", verifyToken, CommentController.create);
 router.get("/getPostComment/:postId", CommentController.getGetPostComment)
+router.put('/likeComment/:commentId', verifyToken, CommentController.likeComment)
 
 export default router;
