@@ -91,9 +91,9 @@ const PostPage = () => {
         <CallToAction />
       </div>
       <CommentSection postId={post._id} />
-      <div className='flex flex-col justify-center items-center mb-5'>
-      <h1 className='text-xl mt-5'>Recent articles</h1>
-      <div className='flex flex-1 gap-5 mt-5 justify-center'>
+      <div className="flex flex-col justify-center items-center mb-5">
+        <h1 className="text-xl mt-5">Recent articles</h1>
+        <div className="flex flex-wrap gap-5 mt-5 justify-center">
           {recentPost &&
             recentPost.map((post) => <PostCard key={post._id} post={post} />)}
         </div>
