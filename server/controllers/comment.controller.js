@@ -55,21 +55,47 @@ const likeComment = async (req, res, next) => {
 };
 
 const editComment = async (req, res, next) => {
-  const comment = await Comment.findById(req.params.commentId);
-  if (!comment) {
-    return next(errorhandler(404, "Comment not found"));
+  try {
+    const comment = await Comment.findById(req.params.commentId);
+    if (!comment) {
+      return next(errorhandler(404, "Comment not found"));
+    }
+    if (comment.userId !== req.user.id && !req.user.isAdmin) {
+      return next(errorhandler(403, "You not allow to edit this comment"));
+    }
+    const editedComment = await Comment.findByIdAndUpdate(
+      req.params.commentId,
+      {
+        content: req.body.content,
+      },
+      { new: true }
+    );
+    res.status(200).json(editedComment);
+  } catch (error) {
+    next(error);
   }
-  if (comment.userId !== req.user.id && !req.user.isAdmin) {
-    return next(errorhandler(403, "You not allow to edit this comment"));
+};
+
+const deleteComment = async (req, res, next) => {
+  try {
+    const comment = await Comment.findById(req.params.commentId);
+    if (!comment) {
+      return next(errorhandler(404, "Comment not found"));
+    }
+    if (comment.userId !== req.user.id && !req.user.isAdmin) {
+      return next(errorhandler(403, "You not allow to edit this comment"));
+    }
+    await Comment.findByIdAndDelete(
+      req.params.commentId,
+      {
+        content: req.body.content,
+      },
+      { new: true }
+    );
+    res.status(200).json(`${req.params.commentId} 's Comment has been deleted`);
+  } catch (error) {
+    next(error);
   }
-  const editedComment = await Comment.findByIdAndUpdate(
-    req.params.commentId,
-    {
-      content: req.body.content,
-    },
-    { new: true }
-  );
-  res.status(200).json(editedComment);
 };
 
 export const CommentController = {
@@ -77,4 +103,5 @@ export const CommentController = {
   getGetPostComment,
   likeComment,
   editComment,
+  deleteComment,
 };
