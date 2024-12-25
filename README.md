@@ -31,6 +31,7 @@ Make sure you have the following installed on your local machine:
 ### 1. Clone the repository
 
 git clone https://github.com/HongNT03/your-blog.git
+
 cd your-blog
 
 ### 2. Install dependencies
@@ -43,6 +44,7 @@ npm install
 Next, navigate to the **frontend** folder and install the client-side dependencies:
 
 cd ../client
+
 npm install
 
 
@@ -51,14 +53,18 @@ npm install
 Create a `.env` file in the **backend** folder and add the following environment variables (replace values as necessary):
 
 PORT=3000
+
 MONGODB_URI=your_mongodb_connection_string
+
 JWT_SECRET=your_jwt_secret
 
 For the frontend, if you're using environment variables (e.g., for API URLs), create a `.env` file in the **frontend** folder:
 
 
 VITE_FIREBASE_API_KEY = "your_fire_base_key"
+
 VITE_CLOUDINARY_CLOUD_NAME = "your-cloudinary_clound_name"
+
 VITE_CLOUDINARY_UPLOAD_PRESET = "your_upload_preset"
 
 
