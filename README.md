@@ -78,7 +78,7 @@ To start both the backend and frontend concurrently:
 
 2. In another terminal, navigate to the **client** folder and run the React app:
 
-   npm run dev
+  npm run dev
 
 
 The app should now be running on [http://localhost:5173](http://localhost:5173) for the frontend, and the backend will be running on [http://localhost:3000](http://localhost:3000).
