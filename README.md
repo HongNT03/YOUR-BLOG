@@ -30,20 +30,19 @@ Make sure you have the following installed on your local machine:
 
 ### 1. Clone the repository
 
-git clone https://github.com/yourusername/your-repo-name.git
-cd your-repo-name
+git clone https://github.com/HongNT03/your-blog.git
+cd your-blog
 
 ### 2. Install dependencies
 
 First, navigate to the **backend** folder and install the server-side dependencies:
 
-cd backend
 npm install
 
 
 Next, navigate to the **frontend** folder and install the client-side dependencies:
 
-cd ../frontend
+cd ../client
 npm install
 
 
@@ -51,14 +50,16 @@ npm install
 
 Create a `.env` file in the **backend** folder and add the following environment variables (replace values as necessary):
 
-PORT=5000
+PORT=3000
 MONGODB_URI=your_mongodb_connection_string
 JWT_SECRET=your_jwt_secret
 
 For the frontend, if you're using environment variables (e.g., for API URLs), create a `.env` file in the **frontend** folder:
 
 
-REACT_APP_API_URL=http://localhost:5000
+VITE_FIREBASE_API_KEY = "your_fire_base_key"
+VITE_CLOUDINARY_CLOUD_NAME = "your-cloudinary_clound_name"
+VITE_CLOUDINARY_UPLOAD_PRESET = "your_upload_preset"
 
 
 ### 4. Run the application
@@ -67,13 +68,14 @@ To start both the backend and frontend concurrently:
 
 1. Open a terminal and navigate to the **backend** folder. Run the backend server:
 
-   npm run dev
+  npm run dev
 
 2. In another terminal, navigate to the **frontend** folder and run the React app:
 
-   npm start
+   npm run dev
 
-The app should now be running on [http://localhost:3000](http://localhost:3000) for the frontend, and the backend will be running on [http://localhost:5000](http://localhost:5000).
+
+The app should now be running on [http://localhost:5173](http://localhost:5173) for the frontend, and the backend will be running on [http://localhost:3000](http://localhost:3000).
 
 ## Folder Structure
 
@@ -81,23 +83,25 @@ The app should now be running on [http://localhost:3000](http://localhost:3000) 
   /models        # MongoDB models
   /routes        # Express routes
   /controllers   # Route handlers
-  /middleware    # Middleware functions
+  /utils         # Middleware functions
   .env           # Environment variables
 
 /frontend
   /src
     /components  # React components
+    /pages       # Page of website
+    /utils       # Cloudinary middleware
     /redux       # Redux store and slices
     /styles      # TailwindCSS customizations (if any)
-    App.js       # Main React app
-    index.js     # React entry point
+    App.jsx      # Main React app
+    main.jsx     # React entry point
   .env           # Frontend environment variables
 
 ## Usage
 
 - Use **Redux** for managing global state across your React components.
 - Use **Tailwind CSS** for styling. If you need to customize Tailwind, you can modify the `tailwind.config.js` file in the frontend folder.
-- Backend API routes are located in the **/backend/routes** folder.
+- Backend API routes are located in the **/server/routes** folder.
 - You can extend the backend to include authentication, CRUD functionality, or other features based on your needs.
 
 ## Contributing
@@ -112,9 +116,9 @@ This project is licensed under the MIT License - see the [LICENSE](LICENSE) file
 
 Feel free to reach out if you have any questions or suggestions!
 
-- **Your Name**
-- **Your Email**
-- **Your LinkedIn/GitHub**: [LinkedIn](https://www.linkedin.com/in/yourname) | [GitHub](https://github.com/yourusername)
+- **Nguyen Tien Hong**
+- **nguyentienhong220903Gmail.com**
+- **Your LinkedIn/GitHub**: [LinkedIn](https://www.linkedin.com/in/hongnt) | [GitHub](https://github.com/HongNT03)
 
 
 ### Notes:
