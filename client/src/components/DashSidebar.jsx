@@ -7,10 +7,10 @@ import {
   HiDocumentText,
   HiOutlineUserGroup,
   HiUser,
-  HiAnnotation
+  HiAnnotation,
 } from "react-icons/hi";
-import { FaComment } from "react-icons/fa";
-import { Link } from "react-router-dom";
+import { MdDashboard } from "react-icons/md";
+import { Link, useNavigate } from "react-router-dom";
 import { signOutSuccess } from "../redux/user/userSlice";
 import { useDispatch, useSelector } from "react-redux";
 
@@ -20,11 +20,16 @@ const DashSidebar = () => {
   const [tab, setTab] = useState("");
   const { currentUser } = useSelector((state) => state.user);
 
+  const navigate = useNavigate();
+
   useEffect(() => {
     const urlParams = new URLSearchParams(location.search);
     const tabFromUrl = urlParams.get("tab");
     if (tabFromUrl) {
       setTab(tabFromUrl);
+    } else {
+      setTab("dashboard");
+      navigate("/dashboard?tab=dashboard", { replace: true });
     }
   }, [location.search]);
 
@@ -61,6 +66,16 @@ const DashSidebar = () => {
           </Link>
           {currentUser.isAdmin && (
             <>
+              <Link to="/dashboard?tab=dashboard">
+                <Sidebar.Item
+                  active={tab === "dashboard" || !tab}
+                  icon={MdDashboard}
+                  labelColor="dark"
+                  as="div"
+                >
+                  Dashboard
+                </Sidebar.Item>
+              </Link>
               <Link to="/dashboard?tab=posts">
                 <Sidebar.Item
                   active={tab === "posts"}
