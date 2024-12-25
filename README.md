@@ -137,12 +137,3 @@ Feel free to reach out if you have any questions or suggestions!
 - **nguyentienhong220903@gmail.com**
 - **Your LinkedIn/GitHub**: [LinkedIn](https://www.linkedin.com/in/hongnt) | [GitHub](https://github.com/HongNT03)
 ```
-
-4. **Preview**: You can use any Markdown editor (like Visual Studio Code, or online Markdown viewers) to preview how the README will appear before pushing it to GitHub.
-
-5. **Formatting Adjustments**: In Markdown:
-   - Use **code blocks** by wrapping commands in triple backticks (` ``` `).
-   - Use **headings** by starting lines with `#` (single `#` for the main title and multiple `#` for sub-headings).
-   - Use **lists** with `-` or `*` for bullet points, and `1.` for numbered lists.
-
-This structure will ensure that your README is clear, organized, and visually appealing!
