@@ -72,11 +72,11 @@ VITE_CLOUDINARY_UPLOAD_PRESET = "your_upload_preset"
 
 To start both the backend and frontend concurrently:
 
-1. Open a terminal and navigate to the **backend** folder. Run the backend server:
+1. Open a terminal and navigate to the **server** folder. Run the backend server:
 
   npm run dev
 
-2. In another terminal, navigate to the **frontend** folder and run the React app:
+2. In another terminal, navigate to the **client** folder and run the React app:
 
    npm run dev
 
