@@ -116,7 +116,7 @@ const UpdatePost = () => {
             onChange={(e) => setData({ ...data, category: e.target.value })}
           >
             <option value="uncategorized">Select a category</option>
-            <option value="js">Javascript</option>
+            <option value="javascript">Javascript</option>
             <option value="reactjs">React.js</option>
             <option value="nextjs">Next.js</option>
           </Select>
