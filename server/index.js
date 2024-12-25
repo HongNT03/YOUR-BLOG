@@ -8,6 +8,8 @@ import AuthRouter from "./routes/auth.route.js";
 import PostRouter from "./routes/post.route.js";
 import CommentRouter from "./routes/comment.route.js";
 
+import path from "path";
+
 dotenv.config();
 
 mongoose
@@ -18,6 +20,8 @@ mongoose
   .catch((err) => {
     console.log(err);
   });
+
+const __dirname = path.resolve();
 
 const app = express();
 app.use(express.json());
@@ -31,6 +35,12 @@ app.use("/api/user", UserRouter);
 app.use("/api/auth", AuthRouter);
 app.use("/api/post", PostRouter);
 app.use("/api/comment", CommentRouter);
+
+app.use(express.static(path.join(__dirname, "/client/dist")));
+
+app.use("*", (res, res) => {
+  res.sendFile(path.join(__dirname, "client", "dist", "index.html"));
+});
 
 app.use((err, req, res, next) => {
   const statusCode = err.statusCode || 500;
