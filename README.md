@@ -85,22 +85,37 @@ The app should now be running on [http://localhost:5173](http://localhost:5173) 
 
 ## Folder Structure
 
-/backend
+/server
+
   /models        # MongoDB models
+
   /routes        # Express routes
+
   /controllers   # Route handlers
+
   /utils         # Middleware functions
+
   .env           # Environment variables
 
-/frontend
+
+/client
+
   /src
+
     /components  # React components
+
     /pages       # Page of website
+
     /utils       # Cloudinary middleware
+
     /redux       # Redux store and slices
+
     /styles      # TailwindCSS customizations (if any)
+
     App.jsx      # Main React app
+
     main.jsx     # React entry point
+
   .env           # Frontend environment variables
 
 ## Usage
