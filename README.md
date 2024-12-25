@@ -35,7 +35,6 @@ Make sure you have the following installed on your local machine:
 
 Clone the repository to your local machine:
 
-```bash
 git clone https://github.com/HongNT03/your-blog.git
 cd your-blog
 ```
@@ -136,4 +135,3 @@ Feel free to reach out if you have any questions or suggestions!
 - **Nguyen Tien Hong**
 - **nguyentienhong220903@gmail.com**
 - **Your LinkedIn/GitHub**: [LinkedIn](https://www.linkedin.com/in/hongnt) | [GitHub](https://github.com/HongNT03)
-```
