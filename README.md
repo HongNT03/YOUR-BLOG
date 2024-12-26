@@ -91,6 +91,11 @@ To start both the backend and frontend concurrently:
    npm run dev
    ```
 
+3. Account Admin to view all functionality of apllication
+   ```
+   Username: Admin@gmail.com
+   Password: Admin@gmail.com
+   ```
 The app should now be running on [http://localhost:5173](http://localhost:5173) for the frontend, and the backend will be running on [http://localhost:3000](http://localhost:3000).
 
 ## Folder Structure
